@@ -13,6 +13,7 @@ public:
 		adj = new list<int>[V];
 	}
 
+	// O(1)
 	void addEdge (int v, int w) {
 		adj[v].push_back (w);
 	}
@@ -20,7 +21,7 @@ public:
 	void DFS (int s);	
 };
 
-
+// O(V) where V is the number of the vertices
 void Graph :: DFSUtil (int s, int *visited) {
 
 	cout << "DFS util function " << "\n";
@@ -36,6 +37,8 @@ void Graph :: DFSUtil (int s, int *visited) {
 		}
 	}
 }
+
+// O(V) where V is the number of the vertices
 void Graph :: DFS (int s) {
 
 	int *visited;
