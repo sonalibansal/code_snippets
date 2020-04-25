@@ -82,8 +82,6 @@ void printGivenLevel(Node *root, int level){
 		printGivenLevel(root->left, level-1);
 		printGivenLevel(root->right, level-1);
 	}
-	cout<<root->left->data<<"->";
-	cout<<root->right->data<<"->";
 }
 
 //Time complexity : O(n^2) in case of skewed tree
