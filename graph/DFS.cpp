@@ -38,7 +38,9 @@ void Graph :: DFSUtil (int s, int *visited) {
 	}
 }
 
-// O(V) where V is the number of the vertices
+// 0(V+E) where is the number of vertices in the graph and 
+// E is the total number of edges.
+// Worst case time complexity : O(V^2)
 void Graph :: DFS (int s) {
 
 	int *visited;

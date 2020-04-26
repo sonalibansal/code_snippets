@@ -32,7 +32,9 @@ Graph :: Graph (int V) {
 }
 
 
-// 0(V) where is the number of vertices in the graph
+// 0(V+E) where is the number of vertices in the graph and 
+// E is the total number of edges.
+// Worst case time complexity : O(V^2)
 void Graph :: BFS (int s) {
 	int *visited = new int[V];
 
