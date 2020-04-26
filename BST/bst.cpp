@@ -166,4 +166,3 @@ int main() {
 	printInOrder (root);  //-1->5->20->10->
 	return 0;
  }
->>>>>>> master
