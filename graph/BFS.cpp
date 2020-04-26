@@ -17,6 +17,7 @@ public:
 	 // O (1)
 	 void addEdge (int v, int w) {
 	 	adj[v].push_back (w);
+	 	adj[w].push_back (v);
 	 }
 
 	 void BFS (int s);

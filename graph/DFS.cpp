@@ -9,13 +9,14 @@ class  Graph {
 	void DFSUtil (int s, int *visted);
 public:
 	Graph (int V) {
-		V = V;
+		this -> V = V;
 		adj = new list<int>[V];
 	}
 
 	// O(1)
 	void addEdge (int v, int w) {
 		adj[v].push_back (w);
+		adj[w].push_back (v);
 	}
 
 	void DFS (int s);	
@@ -24,7 +25,6 @@ public:
 // O(V) where V is the number of the vertices
 void Graph :: DFSUtil (int s, int *visited) {
 
-	cout << "DFS util function " << "\n";
 	visited[s] = 1;
 
 	list<int> :: iterator it;
