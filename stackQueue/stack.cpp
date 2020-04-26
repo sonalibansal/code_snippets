@@ -15,12 +15,10 @@ void printStackElement (stack<int> s) {
 	printStackElement (s);
 
 	cout << top << " ";
-
-	s.push (top);
 }
 
 //Time complexity : O(n) where n is the number of elements in the queue 
-void printQueueElemt (queue<int> q) {
+void printQueueElement (queue<int> q) {
 
 	if (q.empty ()) {
 		return;
@@ -31,7 +29,37 @@ void printQueueElemt (queue<int> q) {
 
 	cout << top << " ";
 
-	printQueueElemt (q);
+	printQueueElement (q);
+}
+
+//Time complexity : O(n) where n is the number of elements in the stack 
+void printStackElementByReference (stack<int> &s) {
+	if (s.empty()) {
+		return;
+	 }
+	 
+	int top = s.top ();
+	s.pop ();
+	printStackElement (s);
+
+	cout << top << " ";
+
+	s.push (top);
+}
+
+//Time complexity : O(n) where n is the number of elements in the queue 
+void printQueueElementByReference (queue<int> &q) {
+
+	if (q.empty ()) {
+		return;
+	 }
+
+	int top = q.front ();
+	q.pop ();
+
+	cout << top << " ";
+
+	printQueueElementByReference (q);
 	q.push (top);
 }
 
@@ -42,9 +70,11 @@ int main () {
 	sampleStack.push (8);
 	sampleStack.push (9);	
 
-	cout << "Stack size " << sampleStack.size() << "\n"; //O(n)
+	cout << "Stack size " << sampleStack.size() << "\n"; //O(1)
 
-	printStackElement (sampleStack); //O(n)
+	printStackElement(sampleStack); //O(n)
+
+	printStackElementByReference (sampleStack); //O(n)
 	sampleStack.pop (); //O(1)
 
 	cout << "New stack size " << sampleStack.size() << "\n";
@@ -55,11 +85,12 @@ int main () {
 	queue.push (3);
 	queue.push (4);
 	queue.push (5);
-	printQueueElemt (queue);
+	printQueueElement (queue);
+	printQueueElementByReference (queue);
 
 	cout << "queue first element " << queue.front() << "\n" ; //O(1)
 	cout << "queue last element " << queue.back() << "\n"; //O(1)
-	cout << "queue size " << queue.size() << "\n"; //O(n)
+	cout << "queue size " << queue.size() << "\n"; //O(1)
 
 	queue.pop ();
 
