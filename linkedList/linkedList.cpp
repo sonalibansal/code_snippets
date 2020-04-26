@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 #include <iostream>
 using namespace std;
 
@@ -17,6 +18,7 @@ Node* push (Node* head, int data) {
  }
 
 void insertAfter (Node* prevNode, int data){
+
 	if(prevNode == NULL){
 	cout<<"Previous node reference cannot be NULL";
 	return;
