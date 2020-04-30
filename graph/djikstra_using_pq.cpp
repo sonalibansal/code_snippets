@@ -23,7 +23,7 @@ void printList (vector<int> dist) {
 	}
 }
 
-// O(V^2) where V is the total number of vertices
+// O(V log V) where V is the total number of vertices and E is the number of edges. 
 void djikstra (int src) {
 
 	priority_queue<pair<int,int> > pq;
