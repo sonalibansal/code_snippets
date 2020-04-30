@@ -26,20 +26,6 @@ int minDistance (vector<int> dist, vector<bool> sptSet) {
 	return min_index;
 }
 
-//O (E) where E is the number of edges from node u. 
-// In worst case it is O(V-1) where V is the total number of vertices
-pair<int, int> findElement (int u, int key) {
-    vector<pair <int, int> > ::iterator it;
-    pair<int, int> item;
-	for (it = adj[u].begin() ;it != adj[u].end(); it++) {
-		item = *it;
-		if (item.first == key) {
-			return item;
-		}
-	}
-	return item;
-}
-
 // O(V) where V is the total number of vertices
 void printList (vector<int> dist) {
 	for (int i = 0; i < V; i++) {
@@ -59,19 +45,20 @@ void djikstra (int src) {
 	}
 
 	dist[src] = 0;
+	vector<pair <int, int> > ::iterator it;
+	pair<int, int> element;
 
 	for (int count = 0; count < V-1; count++) {
 		int u = minDistance (dist, sptSet);
 		sptSet[u] = true;
 
-		for(int i = 0; i< V; i++) {	
-			pair<int, int> element = findElement(u,i);
-			if (element.first != 0 && element.second != 0) {
-				int key = element.first;
-				if (!sptSet[key] && ((dist[u] + element.second) < dist[key])) {
-					dist[key] = dist[u] + element.second;
-				}
-			}	
+		for (it = adj[u].begin(); it!= adj[u].end(); it++) {
+			element = *it;
+			int key = element.first;
+			int weight = element.second;
+			if (!sptSet[key] && (dist[u] + weight < dist[key])) {
+				dist[key] = dist[u] + weight;
+			}
 		}
 	}
 

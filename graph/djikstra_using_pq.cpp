@@ -29,10 +29,8 @@ void djikstra (int src) {
 	priority_queue<pair<int,int> > pq;
 	vector<int> dist(V,INT_MAX);
 
-	pq.push(make_pair (-2, src));
-	pq.push(make_pair (-1, src));
-
 	dist[src] = 0;
+	pq.push (make_pair (0, src));
 	vector<pair <int, int> > ::iterator it;
 	pair<int, int> element;
 
@@ -48,8 +46,7 @@ void djikstra (int src) {
 
 			if (dist[u] + cost < dist[key]) {
 				dist[key] = dist[u] + cost;
-				cout << "key" << key << "dist[key]" << dist[key];
-				//pq.push (make_pair (key, dist[key]));
+				pq.push (make_pair (-dist[key], key));
 			}
 
 		}
