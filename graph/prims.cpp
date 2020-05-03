@@ -5,69 +5,70 @@
 #include <queue>
 using namespace std;
  
-#define V 9
-vector< pair <int, int> > adj[V];
+#define V 3
 
-pair<int,int> p;
+class Node
+{
+public:
+	int id;
+	int weight;
+	int parent;
+
+	Node(int id, int weight, int parent) {
+		this -> id = id;
+		this -> weight = weight;
+		this -> parent = parent;
+	}
+};
+
+vector<Node> adj[V];
+
+bool operator< (Node A, Node B) {
+	if (A.weight != B.weight) {
+		return A.weight > B.weight;
+	}
+	return A.id > B.id;
+}
 
  // O (1)
 void addEdge (int v, int w, int cost) {
-	adj[v].push_back (make_pair (w, cost));
-	adj[w].push_back (make_pair (v, cost));
+	adj[v].push_back (Node (w, cost, -1));
+	adj[w].push_back (Node (v, cost, -1));
 }
 
-// O(V) where V is the total number of vertices
-void printList (vector<int> parent, vector<int> dist) {
-	for (int i = 0; i < V; i++) {
-		if (parent[i] != -1) {
-			cout << parent[i] << "-" << i << " " << dist[i] << "\n";	
-		}
-	}
-}
-
-// O(V log V) where V is the total number of vertices and E is the number of edges. 
+// O(E log V) where V is the total number of vertices and E is the number of edges. 
 void prims (int src) {
 
-	priority_queue<pair<int,int> > pq;
+	priority_queue<Node> pq;
 	vector<int> dist(V, INT_MAX);
 	vector<bool> sptSet(V, false);
-	vector<int> parent(V, 0);
 
 	dist[src] = 0;
-	sptSet[src] = true;
-	parent[src] = -1;
-	pq.push (make_pair (0, src));
-	vector<pair <int, int> > ::iterator it;
-	pair<int, int> element;
-
+	pq.push(Node(src, 0 , -1));
+	vector<Node> ::iterator it;
 
 	while (!pq.empty()) {
-		pair<int, int> top = pq.top ();
-		int u = top.second;
+		Node top = pq.top ();
+		int u = top.id;
 		pq.pop ();
-		if (-dist[u] == top.first) {
+		if (!sptSet[u]) {
 			sptSet[u] = true;
-
-
+			dist[u] = top.weight;
 			for (it = adj[u].begin(); it != adj[u].end() ;it++) {
-				element = *it;
-				int key = element.first;
-				int cost = element.second;
-
-				if (!sptSet[key] && cost < dist[key]) {
-					dist[key] = cost;
-					parent[key] = u;
-					pq.push (make_pair (-dist[key], key));
+				Node element = *it;
+				int key = element.id;
+				int cost = element.weight;
+				if (!sptSet[key]) {
+					pq.push(Node(key, cost , u));
 				}
 
+			}
+			if (top.parent != -1) {
+				cout << top.parent << "-" << top.id << " " << top.weight << endl;
 			}
 		}
 		
 	}
-
-	cout << "Min spanning tree from the source \n";
-	printList (parent,dist);
-	
 }
 
 int main()  {

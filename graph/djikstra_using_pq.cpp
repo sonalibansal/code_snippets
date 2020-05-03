@@ -23,33 +23,41 @@ void printList (vector<int> dist) {
 	}
 }
 
-// O(V log V) where V is the total number of vertices and E is the number of edges. 
+// O(E log V) where V is the total number of vertices and E is the number of edges. 
+// In worst case, value of E = V^2
 void djikstra (int src) {
 
 	priority_queue<pair<int,int> > pq;
 	vector<int> dist(V,INT_MAX);
+	vector<bool> visited(V, false);
 
 	dist[src] = 0;
 	pq.push (make_pair (0, src));
+
+	int i ;
 	vector<pair <int, int> > ::iterator it;
 	pair<int, int> element;
 
 	while (!pq.empty()) {
-		int u = pq.top ().second;
+		pair<int, int> top = pq.top ();
+		int u = top.second;
 		pq.pop ();
 
+		if (!visited[u]) {
+			visited[u] = true;
+			dist[u] = - top.first;
+			for (i = 0 ; i < adj[u].size () ;i++ ) {
+				element = adj[u][i];
+				int key = element.first;
+				int cost = element.second;
 
-		for (it = adj[u].begin(); it != adj[u].end() ;it++) {
-			element = *it;
-			int key = element.first;
-			int cost = element.second;
+				if (!visited[key]) {
+					pq.push (make_pair (-(dist[u] + cost), key));
+				}
 
-			if (dist[u] + cost < dist[key]) {
-				dist[key] = dist[u] + cost;
-				pq.push (make_pair (-dist[key], key));
 			}
-
 		}
+		
 	}
 
 	cout << "Min distance of all nodes from the source \n";
@@ -74,7 +82,7 @@ int main()  {
 	addEdge (5,4,10);
 	addEdge (4,3,9);
    
-	djikstra(0);
+	djikstra(0);  // Output : 0 4 12 19 21 11 9 8 14
 
 	return 0;
 }
