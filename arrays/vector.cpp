@@ -28,6 +28,7 @@ bool compareAge (Student A, Student B) {
 int main () {
 	
 	vector<Student> a;
+	int i;
 
 	a.push_back(Student (24,"Sonali")); // O(1)
 	a.push_back(Student (25, "Mitanshi"));
@@ -36,13 +37,15 @@ int main () {
 
 	sort (a.begin(),a.end(), compareAge); // O(nlogn) worst case and average case , Best case : O(n)
 
-	vector<Student> :: iterator i;
+	for (i = 0 ; i != a.size() ; i++) {
+		cout << a[i].name << " " << a[i].age << endl; // 
+	 }
 
-	for (i = a.begin(); i != a.end(); i++) 
-	{
-		Student object = *i;
-		cout << object.name << " " << object.age;
-	}
+	// Output : 
+	// Ria 25
+	// Mitanshi 25
+	// Sonali 24
+	// Shubhi 24
 
 	return 0;
 
