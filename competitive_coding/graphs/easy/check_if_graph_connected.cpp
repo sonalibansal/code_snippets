@@ -1,3 +1,4 @@
+// https://www.geeksforgeeks.org/check-if-a-directed-graph-is-connected-or-not/
 #include <iostream>
 #include <vector>
 
