@@ -14,6 +14,8 @@ void addEdge (int v, int w) {
 	adj[w].push_back (v);
 }
 
+
+// O(V) where V is the number of Vertices
 int findParent (vector<int> &parent, int i ) {
 	if (parent [i] == -1) {
 		return i;
@@ -23,6 +25,7 @@ int findParent (vector<int> &parent, int i ) {
 }
 
 
+// O(V) as time complexity of findPArent is O(V)
 void Union (vector<int> &parent, int x , int y) {
 	int xset = findParent (parent, x);
 	int yset = findParent (parent, y);
@@ -32,14 +35,14 @@ void Union (vector<int> &parent, int x , int y) {
 	}
 }
 
-
+// O(V^2)
 int isCycle () {
 	vector<int> parent (V, -1);
 
 	for (int i = 0 ; i < V ; i++) {
 		for (int j = 0 ; i < adj[i].size () ; i++) {
 			int x = findParent (parent, i);
-			int y = findParent (parent, j);
+			int y = findParent (parent, adj[i][j]);
 
 			if (x == y) {
 				return 1;

@@ -8,11 +8,12 @@ using namespace std;
 
 vector<int> adj[V];
 
+// O(1)
 void addEdge (int v, int w) {
 	adj[v].push_back (w);
 }
 
-
+//O(VE) where V is the number of Vertices and E is the number of edges
 void buildOriginalArray() {
 
 	vector<int> indegree(V, 0);

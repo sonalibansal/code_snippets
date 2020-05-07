@@ -1,5 +1,6 @@
 #include <iostream>
 #include <vector>
+#include <queue>
 #include <utility> 
 #include <stack>
 #include <climits>
@@ -13,42 +14,51 @@ void addEdge (int v, int w) {
 	adj[v].push_back (w);
 }
 
+// O(VE) where V is the number of Vertices and E is the number of edges
+// In worst case E = V-1 so time complexity = O(V^2)
+void topologicalSorting () {
+	vector<int> indegree(V,0);
+	vector<int> result;
+	queue<int> q;
+	int i,j,top;
 
-// O(V) where V is the number of Vertices. 
-void topologicalUtil (int key, vector<bool> &visited , stack<int> &s) {
-
-	visited [key] = true;
-	for (int i = 0 ; i < adj[key].size() ; i++) {
-		if (!visited[adj[key][i]]) {
-			topologicalUtil (adj[key][i], visited , s);
+	for (i = 0 ; i < V ; i++) {
+		for (j = 0 ; j < adj[i].size() ; j++) {
+			indegree[adj[i][j]] ++;
 		}
 	}
 
-	s.push (key);
-}
+	for (i = 0 ; i < V ; i++) {
+		if(indegree[i] == 0 ) {
+			q.push (i);
+		}
+	}
 
-// O(V+ E) where V is the number of Vertices and E is the number of edges
-void topologicalSorting () {
-	vector<bool> visited(V, false);
+	while (!q.empty()) {
+		top = q.front();
+		q.pop ();
+		result.push_back (top);
 
-	stack<int> s;
+		for (i = 0 ; i < adj[top].size(); i++) {
+			indegree[adj[top][i]]--;
 
-	for (int i = 0 ; i < V ; i++) {
-		if (! visited[i]) {
-			topologicalUtil (i, visited, s);
+			if (indegree[adj[top][i]] == 0) {
+				q.push (adj[top][i]);
+			}
 		}
 	}
 
 	cout << "topological sorting of the graph" << endl;
 
-	while (! s.empty ()) {
-		cout << s.top () << " ";
-		s.pop ();
+	if (result.size () != V) {
+		cout << "topo sort of the graph is not possible" << endl;
+	}
+
+	for (i = 0 ; i < V ; i++) {
+		cout << result[i] << endl;
 	}
 
 }
-
-
 
 int main()  {
 

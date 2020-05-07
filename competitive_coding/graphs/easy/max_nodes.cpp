@@ -14,7 +14,7 @@ void addEdge (int v, int w) {
 	adj[w].push_back (v);
 }
 
-// O(V) where V is the number of vertices 
+// O(V+E) where V is the number of vertices and E is the number of Edges
 void maxNodesUtil (int src, int dest,  vector<bool> &visited) {
 	visited[dest] = true;
 	ans[src] ++;

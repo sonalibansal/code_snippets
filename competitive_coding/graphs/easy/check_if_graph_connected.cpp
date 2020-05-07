@@ -14,29 +14,6 @@ void addEdge (int v, int w) {
 }
 
 
-// O(V^2)
-int isGraphConnected () {
-
-	int i,j;
-	vector<int> indegree(V,0);
-	vector<int> outdegree(V,0);
-
-	for (i = 0 ; i < V ;i++) {
-		for (j = 0 ; j < adj[i].size() ;j++) {
-			indegree[adj[i][j]]++;
-			outdegree[i]++;
-		}
-	}
-
-	for (i = 0 ; i < V ; i++) {
-		if (indegree[i] == 0 && outdegree[i] == 0) {
-			return 0 ;
-		}
-	}
-
-	return 1;
-}
-
 // O(V) 
 void DFSUtil (int src, vector<bool> &visited) {
 

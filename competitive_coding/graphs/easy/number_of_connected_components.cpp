@@ -15,7 +15,7 @@ void addEdge (int v, int w) {
 	adj[w].push_back (v);
 }
 
-// O(V) 
+// O(V+E)  
 void DFSUtil (int src, vector<bool> &visited) {
 
 	visited[src] = true;
@@ -26,16 +26,19 @@ void DFSUtil (int src, vector<bool> &visited) {
 	}
 }
 
+// O(V+E)  
 int numbOfConnectedComponents () {
 	vector <bool> visited(V, false);
 	int ans = 0 ;
 
 	for (int i = 0 ; i < V ; i++) {
-		ans ++;
-		DFSUtil (i, visited);
+		if (!visited[i]) {
+			ans ++;
+			DFSUtil (i, visited);
+		}	
 	}
 
-	return ans - 1;
+	return ans;
 }
 
 int main () {
