@@ -1,4 +1,4 @@
-https://www.geeksforgeeks.org/spanning-tree-with-maximum-degree-using-kruskals-algorithm/
+// https://www.geeksforgeeks.org/spanning-tree-with-maximum-degree-using-kruskals-algorithm/
 #include <iostream>
 #include <vector>
 using namespace std;
