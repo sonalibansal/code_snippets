@@ -45,12 +45,6 @@ int main () {
 	//addEdge (2,3);
 	addEdge (0,2);
 
-	if (isGraphConnected()) {
-		cout << "Graph is connected" << endl;
-	}else {
-		cout << "Graph is not connected " << endl;
-	}
-
 	if (isGraphConnectedOptimised()) {
 		cout << "Graph is connected" << endl;
 	}else {

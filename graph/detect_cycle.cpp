@@ -15,7 +15,7 @@ void addEdge (int v, int w) {
 }
 
 
-// O(V) where V is the number of Vertices
+// O(1) avg time complexity and O(V) in worst case where V is the number of Vertices
 int findParent (vector<int> &parent, int i ) {
 	if (parent [i] == -1) {
 		return i;
@@ -25,7 +25,7 @@ int findParent (vector<int> &parent, int i ) {
 }
 
 
-// O(V) as time complexity of findPArent is O(V)
+// O(1) as time complexity of findPArent is O(1)
 void Union (vector<int> &parent, int x , int y) {
 	int xset = findParent (parent, x);
 	int yset = findParent (parent, y);
@@ -35,7 +35,7 @@ void Union (vector<int> &parent, int x , int y) {
 	}
 }
 
-// O(V^2)
+// O(V+E)
 int isCycle () {
 	vector<int> parent (V, -1);
 

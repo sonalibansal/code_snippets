@@ -21,7 +21,7 @@ int isSafe (int i , int j ,int graph[R][C], int visited[R][C]) {
 
 }
 
-//O(R)
+//O(RC)
 void BFS (int graph[R][C], int visited[R][C], int src, int dest) {
 
 	int row[] = {-1,-1,-1,0,1,1,1,0};

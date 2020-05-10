@@ -13,7 +13,7 @@ void addEdge (int v, int w) {
 	adj[v].push_back (w);
 }
 
-//O(VE) where V is the number of Vertices and E is the number of edges
+//O(V+E) where V is the number of Vertices and E is the number of edges
 void buildOriginalArray() {
 
 	vector<int> indegree(V, 0);
@@ -21,18 +21,22 @@ void buildOriginalArray() {
 	queue<int> q;
 	int i,j;
 
-	for (i = 0 ; i < V ;i++) {
-		for (j = 0 ; j < adj[i].size() ;j++) {
+	// O(V+E) 
+	for (i = 0 ; i < V ;i++) { //O(V)
+		for (j = 0 ; j < adj[i].size() ;j++) { // O(E)
 			indegree[adj[i][j]]++;
 		}
 	}
 
+	//O(V) where V is the number of Vertice
 	for (i = 0 ; i < V ;i++) {
 		if (indegree[i] == 0) {
 			q.push(i);
 		}
 	}
 
+	// O(V+E) as number of elements pushed in this queue is O(V)
+	// and E is the total number of edges in the graph
 	while (!q.empty ()) {
 		int top = q.front ();
 		q.pop ();
