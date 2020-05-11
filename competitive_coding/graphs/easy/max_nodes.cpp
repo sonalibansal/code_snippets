@@ -9,6 +9,7 @@ using namespace std;
 
 vector<int> adj[V];
 unordered_map<int, int> map;
+vector<int> component;
 
 void addEdge (int v, int w) {
 	adj[v].push_back (w);
@@ -18,6 +19,7 @@ void addEdge (int v, int w) {
 // O(V+E) where V is the number of vertices and E is the number of Edges
 void maxNodesUtil (int key, int c,  vector<bool> &visited) {
 	visited[key] = true;
+	component[key] = c;
 	map[c]++;
 	for (int i = 0; i < adj[key].size() ; i++) {
 		if(!visited[adj[key][i]]) {
@@ -26,10 +28,12 @@ void maxNodesUtil (int key, int c,  vector<bool> &visited) {
 	}
 }
 
+// O(V+E)
 void maxNodes () {
 
 	vector<bool> visited(V, false);
 	int c = 1;
+	component.resize(V);
 
 	// O(V+E)
 	for (int i = 0 ; i < V ; i++) {
@@ -40,12 +44,10 @@ void maxNodes () {
 		
 	}
 
-	// O(V+E)
+	// O(V)
 	int i, j;
-	for (i = 1; i <= map.size() ; i++) {
-		for (j = 0 ; j < map[i] ; j++) {
-			cout << map[i] << " ";
-		}	
+	for (i = 0; i < component.size() ; i++) {
+		cout << map[component[i]] << " ";
 	}
 }
 
