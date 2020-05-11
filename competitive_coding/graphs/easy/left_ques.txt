@@ -1,0 +1,5 @@
+https://www.geeksforgeeks.org/number-of-walks-from-source-to-destination/
+https://www.geeksforgeeks.org/find-the-number-of-paths-of-length-k-in-a-directed-graph/
+https://www.geeksforgeeks.org/johnsons-algorithm-for-all-pairs-shortest-paths-implementation/
+
+optimise max nodes code 
