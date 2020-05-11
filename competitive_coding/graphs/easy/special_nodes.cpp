@@ -2,6 +2,8 @@
 #include <iostream>
 #include <vector>
 #include <unordered_set>
+#include <unordered_map>
+
 #include <limits>
 #include <queue>
 using namespace std;
@@ -32,6 +34,24 @@ void specialNodes (vector<int> &val, unordered_set<int> &values, int v, int &ans
 
 }
 
+// O(n) where n is the number of nodes
+void specialNodesUsingHashMap (vector<int> &val, unordered_map<int, int> &values, int v, int &ans) {
+
+	if (values.count(val[v])) {
+		return ;
+	}
+
+	ans++;
+	values.insert ({val[v],1});
+
+	for (int i = 0 ; i < adj[v].size (); i++) {
+		specialNodesUsingHashMap (val, values , adj[v][i], ans);
+	}
+
+	values.erase (val[v]);
+}
+
+
 int main () {
 	vector<int> val {0,2,1,4,3,4,8,10,2,5,1};
 
@@ -50,6 +70,11 @@ int main () {
 	unordered_set<int> values;
 	specialNodes (val, values, v, ans);
 
+	cout << "Number of special nodes = " << ans -1 << endl;
+
+	ans = 0 , v = 1;
+	unordered_map<int, int > map;
+	specialNodesUsingHashMap (val, map, v, ans);
 	cout << "Number of special nodes = " << ans -1 << endl;
 
 	return 0 ;

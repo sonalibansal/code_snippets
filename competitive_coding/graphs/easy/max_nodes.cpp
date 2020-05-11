@@ -1,13 +1,14 @@
 //https://www.geeksforgeeks.org/maximum-number-of-nodes-which-can-be-reached-from-each-node-in-a-graph/
 #include <iostream>
 #include <vector>
+#include <unordered_map>
 
 using namespace std;
 
 #define V 7
 
 vector<int> adj[V];
-vector<int> ans(V, 0);
+unordered_map<int, int> map;
 
 void addEdge (int v, int w) {
 	adj[v].push_back (w);
@@ -15,13 +16,12 @@ void addEdge (int v, int w) {
 }
 
 // O(V+E) where V is the number of vertices and E is the number of Edges
-void maxNodesUtil (int src, int dest,  vector<bool> &visited) {
-	visited[dest] = true;
-	ans[src] ++;
-
-	for (int i = 0; i < adj[dest].size() ; i++) {
-		if(!visited[adj[dest][i]]) {
-			maxNodesUtil (src, adj[dest][i],visited);
+void maxNodesUtil (int key, int c,  vector<bool> &visited) {
+	visited[key] = true;
+	map[c]++;
+	for (int i = 0; i < adj[key].size() ; i++) {
+		if(!visited[adj[key][i]]) {
+			maxNodesUtil (adj[key][i], c , visited);
 		}
 	}
 }
@@ -29,18 +29,23 @@ void maxNodesUtil (int src, int dest,  vector<bool> &visited) {
 void maxNodes () {
 
 	vector<bool> visited(V, false);
+	int c = 1;
 
+	// O(V+E)
 	for (int i = 0 ; i < V ; i++) {
 		if (!visited[i]) {
-			visited[i] = true;
-			vector<bool> visitedChild(V, false);
-			maxNodesUtil (i, i, visitedChild);
+			maxNodesUtil (i, c, visited);
+			c++;
 		}
 		
 	}
 
-	for (int i = 0; i < V ;i++) {
-		cout << ans[i] << " ";
+	// O(V+E)
+	int i, j;
+	for (i = 1; i <= map.size() ; i++) {
+		for (j = 0 ; j < map[i] ; j++) {
+			cout << map[i] << " ";
+		}	
 	}
 }
 

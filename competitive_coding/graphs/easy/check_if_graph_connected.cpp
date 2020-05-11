@@ -14,7 +14,7 @@ void addEdge (int v, int w) {
 }
 
 
-// O(V) 
+// O(V + E) 
 void DFSUtil (int src, vector<bool> &visited) {
 
 	visited[src] = true;

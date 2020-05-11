@@ -14,7 +14,7 @@ void addEdge (int v, int w) {
 	adj[v].push_back (w);
 }
 
-// O(VE) where V is the number of Vertices and E is the number of edges
+// O(V + E) where V is the number of Vertices and E is the number of edges
 // In worst case E = V-1 so time complexity = O(V^2)
 void topologicalSorting () {
 	vector<int> indegree(V,0);

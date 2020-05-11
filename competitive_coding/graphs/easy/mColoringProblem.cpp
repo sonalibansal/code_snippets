@@ -1,3 +1,4 @@
+// https://www.geeksforgeeks.org/m-coloring-problem-backtracking-5/
 #include <iostream>
 #include <vector>
 #include <queue>
@@ -10,6 +11,7 @@ vector<int> adj[V];
 //O(1)
 void addEdge (int u , int v) {
 	adj[u].push_back (v);
+	adj[v].push_back (u);
 }
 
 
@@ -24,10 +26,9 @@ int isSafe (int v, int c, vector<int> &color) {
 
 // O(V+E) 
 bool mColoringUtil (vector<int> &color, int v , int m) {
-
 	
 	if (v == V) {
-		return false;
+		return true;
 	}
 
 	for (int i = 1; i <= m ; i++) {
@@ -54,8 +55,10 @@ void solveMColoringProblem (int m) {
 
 	if (mColoringUtil (color, 0, m) ) {
 		printColors (color);
+	} else {
+		cout << "Solution does not exist" << endl;
 	}
-	cout << "Solution does not exist" << endl;
+	
 }
 
 int main () {
@@ -66,7 +69,7 @@ int main () {
 	addEdge (0,2);
 	addEdge (0,3);
 
-	solveMColoringProblem (3);
+	solveMColoringProblem (3); // 1 2 3 2
 
 	return 0;
 }
