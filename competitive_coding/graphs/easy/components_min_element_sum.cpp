@@ -1,7 +1,7 @@
 //https://www.geeksforgeeks.org/sum-of-the-minimum-elements-in-all-connected-components-of-an-undirected-graph/
 #include <iostream>
 #include <vector>
-#include <limits>
+#include <climits>
 #include <unordered_map>
 using namespace std;
 
@@ -9,27 +9,29 @@ using namespace std;
 vector<int> adj[V];
 unordered_map <int, int> m;
 
+//O(1)
 void addEdge (int u , int v) {
 	adj[u].push_back (v);
 	adj[v].push_back (u);
 }
 
-// void DFSUtil (int key, int c, vector<bool> &visited) {
+//O(V+E)
+void DFSUtil (int key, int c, vector<bool> &visited, vector<int> &arr) {
  	
-// 	visited[key] = true;
-// 	cout << m[c] << " for key = "<< key << "and c= " << c <<  endl;
-// 	if (key < m[c]) {
-// 		m[c] = key;
-// 	}
+	visited[key] = true;
+	if (key < m[c]) {
+		m[c] = arr[key-1];
+	}
 
-// 	for (int i = 0 ; i < adj[key].size (); i++) {
-// 		if (!visited[adj[key][i]]) {
-// 			DFSUtil (adj[key][i], c , visited);
-// 		}
-// 	}	
+	for (int i = 0 ; i < adj[key].size (); i++) {
+		if (!visited[adj[key][i]]) {
+			DFSUtil (adj[key][i], c , visited, arr);
+		}
+	}	
 
-// }
+}
 
+//O(V+E)
 void componentsMinElementSum (vector<int> &arr) {
 
 	vector<bool> visited(V+1, false);
@@ -37,33 +39,24 @@ void componentsMinElementSum (vector<int> &arr) {
 
 	for (int i = 0 ; i < arr.size() ; i++) {
 		if (!visited[arr[i]]) {
-			cout << "inside if block" << endl;
 			m.insert ({c, INT_MAX});
-			cout << m[c] << endl;
-			//DFSUtil (arr[i], c, visited);
+			DFSUtil (arr[i], c, visited, arr);
 			c++;
 		}
 	}
 
-	// int sum = 0;
-	// for (int i = 0 ; i < map.size () ; i++) {
-	// 	sum = sum + map[i];
-	// }
+	int sum = 0;
+	for (int i = 0 ; i < m.size () ; i++) {
+		sum = sum + m[i];
+	}
 
-	// cout << sum << endl;
+	cout << sum << endl;
 
 }
 
 int main () {
 
 	vector<int> arr{1, 6, 2, 7, 3, 8, 4, 9, 5, 10};
-	int m = 5;
-
-	unordered_map<int, int> map;
-	map.insert ({1,2});
-	map.insert ({m, 4});
-
-	cout << map[5] << endl;
 
 	addEdge (1,2);
 	addEdge (3,4);
