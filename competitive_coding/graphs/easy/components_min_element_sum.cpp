@@ -37,10 +37,10 @@ void componentsMinElementSum (vector<int> &arr) {
 	vector<bool> visited(V+1, false);
 	int c = 1;
 
-	for (int i = 0 ; i < arr.size() ; i++) {
-		if (!visited[arr[i]]) {
+	for (int i = 1; i <= V ; i++) {
+		if (!visited[i]) {
 			m.insert ({c, INT_MAX});
-			DFSUtil (arr[i], c, visited, arr);
+			DFSUtil (i, c, visited, arr);
 			c++;
 		}
 	}
