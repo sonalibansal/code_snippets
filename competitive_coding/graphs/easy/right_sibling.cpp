@@ -1,3 +1,4 @@
+//https://www.geeksforgeeks.org/right-sibling-of-each-node-in-a-tree-given-as-array-of-edges/
 #include <iostream>
 #include <vector>
 #include <queue>
