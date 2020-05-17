@@ -1,24 +1,23 @@
-// #include<bits/stdc++.h> 
 #include <iostream>
-
 using namespace std;
 
-class Node{
+class Node {
 	public:
-	int data;
-	Node *next;
-};
+	 int data;
+	 Node *next;
+ };
 
 //Adding the node at the starting 
-Node* push(Node* head, int data){
+Node* push (Node* head, int data) {
 
 	Node* newNode = new Node();
-	newNode->data = data;
-	newNode->next = head;
+	newNode -> data = data;
+	newNode -> next = head;
 	return newNode;
-}
+ }
 
-void insertAfter(Node* prevNode, int data){
+void insertAfter (Node* prevNode, int data){
+
 	if(prevNode == NULL){
 	cout<<"Previous node reference cannot be NULL";
 	return;
