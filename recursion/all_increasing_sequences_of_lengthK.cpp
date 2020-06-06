@@ -1,3 +1,4 @@
+//https://www.geeksforgeeks.org/print-increasing-sequences-length-k-first-n-natural-numbers/
 #include <iostream>
 using namespace std;
 
