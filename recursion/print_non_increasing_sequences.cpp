@@ -1,3 +1,4 @@
+//https://www.geeksforgeeks.org/print-all-non-increasing-sequences-of-sum-equal-to-a-given-number/
 #include <iostream>
 #include <vector>
 using namespace std;
