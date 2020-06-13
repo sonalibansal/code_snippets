@@ -2,38 +2,24 @@
 #include <iostream>
 using namespace std;
 
-//O(n^k) where n is the set size and k is the length wanted for the string
-void printAllKLengthStringsUtil (char set[], string prefix, int n, int k) {
-	if (k == 0) {
-		cout << prefix << endl;
+char arr[] = {'a','b'};
+int n = 2, k = 3;
+string output = "";
+
+void printAllCombinations(int length) {
+	if(length == k) {
+		cout << output << endl;
 		return;
 	}
-
-	for (int i = 0 ; i < n ; i++) {
-		prefix = prefix + set[i];
-		printAllKLengthStringsUtil (set, prefix , n, k-1);
-		prefix.erase (prefix.length() -1);
+	for (int i = 0; i < n ; i++) {
+		output = output+ arr[i];
+		printAllCombinations(length+1);
+		output.erase(output.size()-1);
 	}
-
 }
 
-void printAllKLengthStrings (char set[], int k, int n) {
-
-	string prefix = "";
-
-	printAllKLengthStringsUtil (set, prefix, n , k);
-
-}
-
-int main () {
-
-	char set[] = {'a','b'};
-
-	int k = 3;
-	printAllKLengthStrings (set, k, 2);
-
-	char set2[] = {'a', 'b', 'c', 'd'}; 
-    k = 1; 
-    printAllKLengthStrings(set2, k, 4); 
-
+int main() {
+	// your code goes here
+	printAllCombinations(0);
+	return 0;
 }

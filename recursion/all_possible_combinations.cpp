@@ -1,39 +1,30 @@
+//https://www.geeksforgeeks.org/print-all-possible-combinations-of-r-elements-in-a-given-array-of-size-n/
 #include <iostream>
+#include <vector>
 using namespace std;
 
-
-void printCombination (int arr[], int data[], int start, int end, int index, int r) {
-	if (index == r) {
-		for (int j = 0 ; j < r; j++) {
-			cout << data[j] << " ";
+int arr[] = {1,2,3,4};
+int n = 4,r=2;
+vector<int> output(r);
+void printAllCombinations(int length, int index) {
+	if(length == r) {
+		for (int i = 0 ; i < r ;i++) {
+			cout << output[i] << " ";
 		}
 		cout << endl;
 		return;
 	}
-
-	if (start >= end) {
+	
+	if(index >= n) {
 		return;
 	}
-
-	data[index] = arr[start];
-	printCombination (arr, data, start + 1, end, index + 1, r);
-
-	while (arr[i] == arr[i+1])
-        i++;
-
-	printCombination (arr, data, start + 1, end , index, r);
+	output[length] = arr[index];
+	printAllCombinations(length+1, index+1);
+	printAllCombinations(length, index+1);
 }
 
-
-int main () {
-
-	int arr[] = {1,2,3,4,5};
-
-	int r = 3, n = 5;
-
-	int data[r];
-
-	sort(arr, arr+n); 
-
-	printCombination (arr, data, 0, n, 0, r);
+int main() {
+	// your code goes here
+	printAllCombinations(0, 0);
+	return 0;
 }
