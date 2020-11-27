@@ -135,6 +135,7 @@ Node* deleteNode (Node* root, int data) {
 		Node *temp = minValueNode (root -> right);
 		root -> data = temp -> data;
 		root -> right = deleteNode (root -> right, temp -> data); 
+		return root;
 	}
 }
 
