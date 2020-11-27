@@ -7,7 +7,7 @@ using namespace std;
  
 #define V 9
 
-// 1. Sort all the edges in non-decreasing order of their weight.
+// 1. Sort all the edges in increasing order of their weight.
 // 2. Pick the smallest edge. Check if it forms a cycle with the spanning tree formed so far. If cycle is not formed, include this edge. Else, discard it.
 // 3. Repeat step#2 until there are (V-1) edges in the spanning tree
 
@@ -69,7 +69,8 @@ void Kruskal (int src) {
 	vector<int> parent (V, -1);
 
 	while (!pq.empty ()) {
-		Node top = pq.top ();
+		Node top = pq.top ();			
+		cout << top.weight << endl;
 		int x = findParent (parent, top.id);
 		int y = findParent (parent, top.parent);
 		if (x != y) {
@@ -83,24 +84,24 @@ void Kruskal (int src) {
 
 int main()  {
 
-	// addEdge (0,1,1);
-	// addEdge (0,2,5);
-	// addEdge (2,1,6);
+	addEdge (0,1,1);
+	addEdge (0,2,5);
+	addEdge (2,1,6);
 
-	addEdge (0,1,4);
-	addEdge (0,7,8);
-	addEdge (1,2,8);
-	addEdge (1,7,11);
-	addEdge (7,8,7);
-	addEdge (7,6,1);
-	addEdge (2,8,2);
-	addEdge (2,5,4);
-	addEdge (2,3,7);
-	addEdge (6,8,6);
-	addEdge (6,5,2);
-	addEdge (5,3,14);
-	addEdge (5,4,10);
-	addEdge (4,3,9);
+	// addEdge (0,1,4);
+	// addEdge (0,7,8);
+	// addEdge (1,2,8);
+	// addEdge (1,7,11);
+	// addEdge (7,8,7);
+	// addEdge (7,6,1);
+	// addEdge (2,8,2);
+	// addEdge (2,5,4);
+	// addEdge (2,3,7);
+	// addEdge (6,8,6);
+	// addEdge (6,5,2);
+	// addEdge (5,3,14);
+	// addEdge (5,4,10);
+	// addEdge (4,3,9);
    
 	Kruskal(0);
 
